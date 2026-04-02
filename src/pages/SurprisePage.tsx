@@ -1,3 +1,4 @@
+/// <reference path="../react-env-shim.d.ts" />
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,7 +96,7 @@ export default function SurprisePage() {
 
   const tryAnother = () => {
     if (destinations.length < 2) {
-      setConfettiKey((k) => k + 1);
+      setConfettiKey((k: number) => k + 1);
       return;
     }
 
@@ -105,7 +106,7 @@ export default function SurprisePage() {
     } while (newIdx === destIndex);
 
     setDestIndex(newIdx);
-    setConfettiKey((k) => k + 1);
+    setConfettiKey((k: number) => k + 1);
   };
 
   const goPlanner = () => {
@@ -122,7 +123,7 @@ export default function SurprisePage() {
       <div className="bg-glow" />
 
       <div className="confetti-layer" key={confettiKey}>
-        {confetti.map((piece, idx) => (
+        {confetti.map((piece: ConfettiPiece, idx: number) => (
           <span
             key={`${confettiKey}-${idx}`}
             className="confetti"
@@ -142,7 +143,7 @@ export default function SurprisePage() {
           <img
             src={dest?.image || fallbackImage}
             alt={destinationName || 'Destination'}
-            onError={(e) => {
+            onError={(e: { currentTarget: { src: string } }) => {
               const img = e.currentTarget;
               if (img.src !== fallbackImage) {
                 img.src = fallbackImage;
